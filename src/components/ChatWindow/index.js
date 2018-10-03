@@ -13,11 +13,20 @@ class ChatWindow extends Component {
     };
   }
 
-  async submitMessage(e) {
+  handleAttachmentButtonClick(e, button) {
     e.preventDefault();
-    this.props.addNewMessage('user', this.state.messageText);
+    this.sendMessage(button.value);
+  }
+
+  submitMessage(e) {
+    e.preventDefault();
+    this.sendMessage(this.state.messageText);
     this.setState({ messageText: '' });
-    const res = await Interactions.send('AmplelabsBot', this.state.messageText);
+  }
+
+  async sendMessage(text) {
+    this.props.addNewMessage('user', text);
+    const res = await Interactions.send('AmplelabsBot', text);
     this.props.addNewMessage(
       'bot',
       res.message,
@@ -32,21 +41,9 @@ class ChatWindow extends Component {
             {attachment.buttons
               ? attachment.buttons.map(attachmentButton => (
                   <button
-                    onClick={async e => {
-                      e.preventDefault();
-                      this.props.addNewMessage('user', attachmentButton.value);
-                      const res = await Interactions.send(
-                        'AmplelabsBot',
-                        attachmentButton.value
-                      );
-                      this.props.addNewMessage(
-                        'bot',
-                        res.message,
-                        res.responseCard
-                          ? res.responseCard.genericAttachments
-                          : null
-                      );
-                    }}>
+                    onClick={e =>
+                      this.handleAttachmentButtonClick(e, attachmentButton)
+                    }>
                     {attachmentButton.text}
                   </button>
                 ))
