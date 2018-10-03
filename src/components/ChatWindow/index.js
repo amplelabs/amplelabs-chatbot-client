@@ -29,6 +29,28 @@ class ChatWindow extends Component {
     return attachments
       ? attachments.map(attachment => (
           <Message author={author}>
+            {attachment.buttons
+              ? attachment.buttons.map(attachmentButton => (
+                  <button
+                    onClick={async e => {
+                      e.preventDefault();
+                      this.props.addNewMessage('user', attachmentButton.value);
+                      const res = await Interactions.send(
+                        'AmplelabsBot',
+                        attachmentButton.value
+                      );
+                      this.props.addNewMessage(
+                        'bot',
+                        res.message,
+                        res.responseCard
+                          ? res.responseCard.genericAttachments
+                          : null
+                      );
+                    }}>
+                    {attachmentButton.text}
+                  </button>
+                ))
+              : null}
             {attachment.imageUrl ? (
               <img
                 style={{ width: '100%' }}
