@@ -81,8 +81,6 @@ class ChatWindow extends Component {
           onChange={this.handleTextChange}
           messageValue={this.state.messageText}
           />
-          <button>Submit</button>
-        </MessageInputForm>
       </MainContainer>
     );
   }
