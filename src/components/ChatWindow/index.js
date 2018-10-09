@@ -1,9 +1,20 @@
 import React, { Component, Fragment } from 'react';
 import { Interactions } from 'aws-amplify';
 import Message from './Message';
-import MessageList from './MessageList';
+import Header from './Header';
 import MessageInputForm from './MessageInputForm';
 import MainContainer from './MainContainer';
+import styled from 'styled-components';
+
+const MessageList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+  flex-grow: 1;
+`;
 
 class ChatWindow extends Component {
   constructor(props) {
@@ -18,11 +29,13 @@ class ChatWindow extends Component {
     this.sendMessage(button.value);
   }
 
-  submitMessage(e) {
+  handleTextChange = e => this.setState({ messageText: e.target.value });
+
+  submitMessage = e => {
     e.preventDefault();
     this.sendMessage(this.state.messageText);
     this.setState({ messageText: '' });
-  }
+  };
 
   async sendMessage(text) {
     this.props.addNewMessage('user', text);
@@ -80,7 +93,7 @@ class ChatWindow extends Component {
           onSubmit={this.submitMessage}
           onChange={this.handleTextChange}
           messageValue={this.state.messageText}
-          />
+        />
       </MainContainer>
     );
   }
