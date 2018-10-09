@@ -75,12 +75,10 @@ class ChatWindow extends Component {
             );
           })}
         </MessageList>
-        <MessageInputForm onSubmit={e => this.submitMessage(e)}>
-          <input
-            type="text"
-            value={this.state.messageText}
-            placeholder="Type a message"
-            onChange={e => this.setState({ messageText: e.target.value })}
+        <MessageInputForm
+          onSubmit={this.submitMessage}
+          onChange={this.handleTextChange}
+          messageValue={this.state.messageText}
           />
           <button>Submit</button>
         </MessageInputForm>

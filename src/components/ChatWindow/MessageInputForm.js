@@ -1,7 +1,16 @@
 import styled from 'styled-components';
+import React from 'react';
 
-const MessageInputForm = styled.form`
-  flex-grow: 0;
-`;
-
-export default MessageInputForm;
+export default function MessageInputForm(props) {
+  return (
+    <form onSubmit={props.onSubmit}>
+      <input
+        type="text"
+        value={props.messageValue}
+        placeholder="Type a message..."
+        onChange={props.onChange}
+      />
+      <button>Submit</button>
+    </form>
+  );
+}
