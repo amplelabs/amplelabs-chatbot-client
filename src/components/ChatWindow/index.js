@@ -63,6 +63,7 @@ class ChatWindow extends Component {
   render() {
     return (
       <MainContainer>
+        <Header />
         <MessageList>
           {this.props.messages.map((message, index) => {
             return (
