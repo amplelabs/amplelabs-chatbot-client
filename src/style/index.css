@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'SF-UI';
+  src: url('sf-ui-text-regular.woff') format('woff');
+}
+
+body {
+  font-family: 'SF-UI', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+button {
+  cursor: pointer;
+}

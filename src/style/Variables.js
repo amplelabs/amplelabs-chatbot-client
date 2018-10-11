@@ -6,10 +6,6 @@ export const theme = {
   shadowGrey: '#B0B0B2',
   transpGrey: 'rgba(176, 176, 178, .5)',
   padding: '22px',
-  corner: '8px',
-  height: '60px',
-  button: {
-    padding: '12px 22px',
-    corner: '30px'
-  }
+  borderRadius: '8px',
+  boxShadow: '1px 1px 10px rgba(176, 176, 178, .5)'
 };
