@@ -89,6 +89,18 @@ class ChatWindow extends Component {
       : null;
   }
 
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     return (
       <MainContainer>
@@ -105,6 +117,12 @@ class ChatWindow extends Component {
             );
           })}
         </MessageList>
+        <div
+          style={{ display: 'hidden' }}
+          ref={el => {
+            this.messagesEnd = el;
+          }}
+        />
         <MessageInputForm
           onSubmit={this.submitMessage}
           onChange={this.handleTextChange}
