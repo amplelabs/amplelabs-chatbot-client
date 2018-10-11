@@ -5,6 +5,7 @@ import Header from './Header';
 import MessageInputForm from './MessageInputForm';
 import MainContainer from './MainContainer';
 import styled from 'styled-components';
+import { theme } from '../../style/Variables.js';
 
 const MessageList = styled.ul`
   display: flex;
@@ -14,6 +15,22 @@ const MessageList = styled.ul`
   list-style: none;
   padding: 0;
   flex-grow: 1;
+  .options {
+    align-self: ${props =>
+      props.author === 'user' ? 'flex-end' : 'flex-start'};
+    button {
+      padding: 12px 22px;
+      border: 1px solid ${theme.red};
+      color: ${theme.red};
+      background: none;
+      border-radius: 30px;
+      margin: 0.25rem 0.75rem 0.25rem 0;
+      &:hover {
+        background: ${theme.red};
+        color: white;
+      }
+    }
+  }
 `;
 
 class ChatWindow extends Component {
@@ -50,25 +67,24 @@ class ChatWindow extends Component {
   renderAttachments(author, attachments) {
     return attachments
       ? attachments.map(attachment => (
-          <Message author={author}>
-            {attachment.buttons
-              ? attachment.buttons.map(attachmentButton => (
-                  <button
-                    onClick={e =>
-                      this.handleAttachmentButtonClick(e, attachmentButton)
-                    }>
-                    {attachmentButton.text}
-                  </button>
-                ))
-              : null}
-            {attachment.imageUrl ? (
+          <li className="options" author={author}>
+            {attachment.buttons &&
+              attachment.buttons.map(attachmentButton => (
+                <button
+                  onClick={e =>
+                    this.handleAttachmentButtonClick(e, attachmentButton)
+                  }>
+                  {attachmentButton.text}
+                </button>
+              ))}
+            {attachment.imageUrl && (
               <img
                 style={{ width: '100%' }}
                 src={attachment.imageUrl}
                 alt="Map"
               />
-            ) : null}
-          </Message>
+            )}
+          </li>
         ))
       : null;
   }
