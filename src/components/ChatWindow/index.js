@@ -24,7 +24,7 @@ const MessageList = styled.ul`
       color: ${theme.red};
       background: none;
       border-radius: 30px;
-      margin: 0.25rem 0.75rem 0.25rem 0;
+      margin: 0.25rem 0.75rem 1rem 0;
       &:hover {
         background: ${theme.red};
         color: white;
@@ -68,6 +68,13 @@ class ChatWindow extends Component {
     return attachments
       ? attachments.map(attachment => (
           <li className="options" author={author}>
+            {attachment.imageUrl && (
+              <img
+                style={{ width: '100%' }}
+                src={attachment.imageUrl}
+                alt="Map"
+              />
+            )}
             {attachment.buttons &&
               attachment.buttons.map(attachmentButton => (
                 <button
@@ -77,13 +84,6 @@ class ChatWindow extends Component {
                   {attachmentButton.text}
                 </button>
               ))}
-            {attachment.imageUrl && (
-              <img
-                style={{ width: '100%' }}
-                src={attachment.imageUrl}
-                alt="Map"
-              />
-            )}
           </li>
         ))
       : null;
