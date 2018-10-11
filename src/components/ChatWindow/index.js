@@ -10,11 +10,15 @@ import { theme } from '../../style/Variables.js';
 const MessageList = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 600px;
   margin: 0 auto;
   list-style: none;
   padding: 0;
   flex-grow: 1;
+  width: 500px;
+  @media (max-width: 500px) {
+    width: 95%;
+  }
+
   .options {
     align-self: ${props =>
       props.author === 'user' ? 'flex-end' : 'flex-start'};

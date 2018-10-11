@@ -3,9 +3,8 @@ import { theme } from '../../style/Variables.js';
 
 const Message = styled.li`
   align-self: ${props => (props.author === 'user' ? 'flex-end' : 'flex-start')};
-  max-width: 500px;
+  max-width: 400px;
   overflow: auto;
-  min-height: 60px;
   margin: 1rem 0;
   border-radius: ${theme.borderRadius};
   background: ${props => (props.author === 'user' ? theme.yellow : 'white')};
